@@ -10,7 +10,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getLocais()
-    this.loadMap()
   }
 
   // Inicia o mapa
@@ -32,7 +31,7 @@ class App extends Component {
       .then(response => {
         this.setState({
           locais: response.data.response.groups[0].items
-        })
+        }, this.loadMap())
       })
       .catch(error => {
         console.log("ERRO:" + error)
@@ -43,9 +42,18 @@ class App extends Component {
 
     // Cria o mapa
     var map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: -21.211045, lng: -47.804921},
-      zoom: 16
+      center: {lat: -21.170334, lng: -47.810142},
+      zoom: 12
     })
+
+    this.state.locais.map(local => {
+      var marker = new window.google.maps.Marker({
+        position: {lat: local.venue.location.lat, lng: local.venue.location.lng},
+        map: map,
+        title: local.venue.name
+      })
+    })
+
   }
 
   render() {
