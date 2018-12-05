@@ -5,6 +5,7 @@ import axios from 'axios'
 class App extends Component {
 
   state = {
+    query: 'drink',
     locais: []
   }
 
@@ -12,7 +13,7 @@ class App extends Component {
     this.getLocais()
   }
 
-  // Inicia o mapa
+  //Carrega o mapa
   loadMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyA6QsaRcYcvFayEmbuY2_X3iMREEWwiGZ4&callback=initMap")
     window.initMap = this.initMap
@@ -23,7 +24,7 @@ class App extends Component {
     const parametros = {
       client_id: "NQBSOREJ4CNOIV4THG1QNP3HWUA4PW2YRUDWEICCE13Z3MER",
       client_secret: "N1B1VJED2BUVZENKCJR3UFGH5PFVXWHLDRPIK3YYBARCKOC1",
-      query: "drink",
+      query: this.state.query,
       near: "Ribeirao Preto",
       v: "20181202"
     }
@@ -46,12 +47,29 @@ class App extends Component {
       zoom: 12
     })
 
+    // Cria a infowindow
+    var infowindow = new window.google.maps.InfoWindow()
+
+    //Cria os Markers
     this.state.locais.map(local => {
+
+      var contentString = local.venue.name
+
       var marker = new window.google.maps.Marker({
         position: {lat: local.venue.location.lat, lng: local.venue.location.lng},
         map: map,
         title: local.venue.name
       })
+
+      marker.addListener('click', function() {
+
+        //Conteudo da infowindow
+        infowindow.setContent(contentString)
+
+        //Abre a infowindow
+        infowindow.open(map, marker)
+      })
+
     })
 
   }
@@ -65,6 +83,7 @@ class App extends Component {
   }
 }
 
+//Cria um elemento script
 function loadScript(url) {
   var index  = window.document.getElementsByTagName("script")[0]
   var script = window.document.createElement("script")
