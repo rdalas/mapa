@@ -6,7 +6,7 @@ import axios from 'axios';
 class Conteudo extends Component {
   state = {
     locais: [],
-    queryLocais:[],
+    todosLocais:[],
     query: ''
   };
 
@@ -27,7 +27,7 @@ class Conteudo extends Component {
       .then(response => {
         this.setState({
           locais: response.data.response.groups[0].items,
-          queryLocais: response.data.response.groups[0].items,
+          todosLocais: response.data.response.groups[0].items,
         })
       })
       .catch(error => {
@@ -65,7 +65,7 @@ class Conteudo extends Component {
       });
     } else {
       this.setState({
-        locais: this.state.queryLocais
+        locais: this.state.todosLocais
       });
     }
   };

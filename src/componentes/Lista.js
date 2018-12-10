@@ -4,7 +4,7 @@ class Lista extends Component {
   render() {
     const locais = this.props.locais;
     return (
-      <div className="Lista">
+      <div className="lista">
         <h2>Bares</h2>
         <input type="text"
           value={this.props.query}
