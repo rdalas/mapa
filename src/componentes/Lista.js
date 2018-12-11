@@ -5,8 +5,9 @@ class Lista extends Component {
     const locais = this.props.locais;
     return (
       <div className="lista">
-        <h2>Bares</h2>
+        <h2>Filtra Locais</h2>
         <input type="text"
+          className="buscaitem"
           value={this.props.query}
           onChange={e => this.props.alteraQuery(e.target.value)}
         />
