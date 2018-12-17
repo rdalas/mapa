@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 
 class Lista extends Component {
   render() {
+    let classe = 'lista';
     const locais = this.props.locais;
+    // Altera o CSS da div para abrir a lista
+    if (this.props.visivel) {
+      classe = 'lista open';
+    }
     return (
-      <div className="lista">
+      <div className={classe}>
         <h2>Filtra Locais</h2>
         <input type="text"
           className="buscaitem"

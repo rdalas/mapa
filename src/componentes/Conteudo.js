@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Mapa from './Mapa';
 import Lista from './Lista';
+import Cabecalho from './Cabecalho';
 import axios from 'axios';
 
 class Conteudo extends Component {
   state = {
     locais: [],
     todosLocais:[],
+    visivel: false,
     query: ''
   };
 
@@ -14,6 +16,7 @@ class Conteudo extends Component {
     this.getLocais()
   }
 
+  // API Fousquare
   getLocais = () => {
     const foursquare = "https://api.foursquare.com/v2/venues/explore?"
     const parametros = {
@@ -31,12 +34,14 @@ class Conteudo extends Component {
         })
       })
       .catch(error => {
-        console.log("ERRO:" + error)
+        alert("ERRO AO CARREGAR O FOURSQUARE: " + error)
       })
   }
 
+  //Ao clicar no marker abre a janela com as informacoes
   mostraConteudo = (local) => {
     for (let i = 0; i < window.markers.length; i++) {
+      window.markers[i].setAnimation(null);
       if (local.venue.name === window.markers[i].title) {
         let content = this.preparaConteudo(local);
         window.infoWindow.setContent(content);
@@ -52,9 +57,11 @@ class Conteudo extends Component {
       Name: ${local.venue.name}</a>
     </p>
     <p>Address: ${local.venue.location.address}</p>
+    <p>Fonte: <a href="https://pt.foursquare.com/">Foursquare</a></p>
   </div>`;
   }
 
+  //Filtra a lista de locais
   alteraQuery = query => {
     this.setState({
       query
@@ -74,14 +81,25 @@ class Conteudo extends Component {
     return locais.filter(local => local.venue.name.toLowerCase().includes(query.toLowerCase()));
   };
 
+  //Abre a lista de locais ao clicar no botao do menu
+  abreLista = () => {
+    this.setState((prevState) => {
+      return {visivel: !prevState.visivel}
+    });
+  }
+
   render() {
     return (
       <div className = "conteudo">
+        <Cabecalho
+          abreLista = {this.abreLista}
+        />
         <Lista
           locais = {this.state.locais}
           mostraConteudo = {this.mostraConteudo}
           query = {this.state.query}
           alteraQuery = {this.alteraQuery}
+          visivel = {this.state.visivel}
         />
         <Mapa
           locais = {this.state.locais}

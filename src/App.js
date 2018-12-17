@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Cabecalho from './componentes/Cabecalho';
 import Conteudo from './componentes/Conteudo';
+import ErrorBoundary from './ErrorBoundary'
 
 class App extends Component {
 
@@ -24,8 +24,9 @@ class App extends Component {
     this.loadMap();
     return (
       <div className='App'>
-        <Cabecalho/>
-        <Conteudo/>
+        <ErrorBoundary>
+          <Conteudo/>
+        </ErrorBoundary>
       </div>
     );
   }

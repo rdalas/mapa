@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Mapa extends Component {
   markers = [];
+  //Adiciona os marcadores ao mapa
   addMarkers = locais => {
     if (window.google) {
       let infoWindow = new window.google.maps.InfoWindow();
@@ -27,6 +28,7 @@ class Mapa extends Component {
     }
   };
 
+  //Limpa os markers antes de carregar novamente
   removeMarkers = () => {
     for (let i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(null);

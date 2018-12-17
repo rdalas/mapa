@@ -7,17 +7,54 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: black;
-  position: absolute;
-  overflow: hidden;
   top: 0px;
   bottom: 0px;
-  width: 100%;
   font-family: "Avenir Next", "Avenir", sans-serif;
 }
 
 .cabecalho{
-  font-size: 150%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background-color: black;
+}
+
+.cabecalhonav{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cabecalhologo{
+  font-size: 1.5em;
   color: #FFFFFF;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+.botao{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 24px;
+  width: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.botao:focus{
+  outline: none;
+}
+
+.linhabotao{
+  width: 30px;
+  height: 2px;
+  background-color: #FFFFFF;
 }
 
 #map {
@@ -25,13 +62,28 @@ html, body {
 }
 
 .lista {
-  width: 25%;
+  width: 70%;
+  max-width: 400px;
   height: 100%;
   background-color: #0101DF;
-  z-index: 1;
-  position: absolute;
+  z-index: 200;
+  position: fixed;
   overflow-y: scroll;
   color: #FFFFFF;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.open{
+  transform: translateX(0);
+}
+
+.lista ol{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .buscaitem {
@@ -39,14 +91,32 @@ html, body {
   z-index: 10;
   padding: 10px;
   width: 80%;
+  font-size: 1.2rem;
 }
 
-a {
+.lista li{
+  margin: 0.25rem 0;
+}
+
+.lista a {
   text-decoration: none;
   color: #FFFFFF;
   transition: color 0.3s ease;
+  font-size: 1.2rem;
 }
 
-a:hover {
+.lista a:hover {
   color: #FF0000;
+}
+
+@media screen and (max-width: 400px) {
+  .cabecalhologo {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .cabecalhologo {
+    font-size: 0.8em;
+  }
 }
