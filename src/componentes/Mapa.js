@@ -22,9 +22,6 @@ class Mapa extends Component {
           infoWindow.open(window.mapObject, marker);
           marker.setAnimation(window.google.maps.Animation.BOUNCE);
         });
-        marker.addListener(infoWindow,"closeclick", () => {
-          marker.setAnimation(null);
-        });
         this.markers.push(marker);
       }
       window.infoWindow = infoWindow;
