@@ -7,9 +7,11 @@ class Cabecalho extends Component {
         <nav className="cabecalhonav">
           <div className="cabecalhologo">Bares em Ribeirão Preto</div>
           //Botao para abrir e fechar a lista de locais
-          <button className="botao" onClick = {this.props.abreLista}>
+          <button className="botao">
             <div className="linhabotao"></div>
-            <div className="linhabotao"></div>
+            <div className="linhabotao">
+              <input type="checkbox" id="menu"/>
+            </div>
             <div className="linhabotao"></div>
           </button>
         </nav>

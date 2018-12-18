@@ -20,6 +20,10 @@ class Mapa extends Component {
           let content = this.props.preparaConteudo(locais[i]);
           infoWindow.setContent(content);
           infoWindow.open(window.mapObject, marker);
+          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        });
+        marker.addListener(infoWindow,"closeclick", () => {
+          marker.setAnimation(null);
         });
         this.markers.push(marker);
       }

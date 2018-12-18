@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import Mapa from './Mapa';
 import Lista from './Lista';
-import Cabecalho from './Cabecalho';
 import axios from 'axios';
 
 class Conteudo extends Component {
   state = {
     locais: [],
     todosLocais:[],
-    visivel: false,
     query: ''
   };
 
@@ -68,7 +66,7 @@ class Conteudo extends Component {
     });
     if (query) {
       this.setState({
-        locais: this.filtraLocais(query, this.state.locais)
+        locais: this.filtraLocais(query, this.state.todosLocais)
       });
     } else {
       this.setState({
@@ -81,25 +79,14 @@ class Conteudo extends Component {
     return locais.filter(local => local.venue.name.toLowerCase().includes(query.toLowerCase()));
   };
 
-  //Abre a lista de locais ao clicar no botao do menu
-  abreLista = () => {
-    this.setState((prevState) => {
-      return {visivel: !prevState.visivel}
-    });
-  }
-
   render() {
     return (
       <div className = "conteudo">
-        <Cabecalho
-          abreLista = {this.abreLista}
-        />
         <Lista
           locais = {this.state.locais}
           mostraConteudo = {this.mostraConteudo}
           query = {this.state.query}
           alteraQuery = {this.alteraQuery}
-          visivel = {this.state.visivel}
         />
         <Mapa
           locais = {this.state.locais}

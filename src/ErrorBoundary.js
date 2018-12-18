@@ -19,7 +19,7 @@ class ErrorBoundary extends Component {
     if (this.state.errorInfo) {
       // Error path
       return (
-        <div>
+        <div className="erro">
           <h2>Problema ao carregar a página.</h2>
           <details style={{ whiteSpace: 'pre-wrap' }}>
             {this.state.error && this.state.error.toString()}
